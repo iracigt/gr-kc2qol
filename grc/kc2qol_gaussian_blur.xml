@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<block>
+  <name>1D Gaussian Blur</name>
+  <key>kc2qol_gaussian_blur</key>
+  <category>[KC2QOL]</category>
+  <import>import kc2qol</import>
+  <make>kc2qol.gaussian_blur($m, $p, $sigma, $vlen)</make>
+
+  <param>
+    <name>Number of window points</name>
+    <key>m</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Shape</name>
+    <key>p</key>
+    <value>0.5</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>Sigma</name>
+    <key>sigma</key>
+    <value>1</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>Vector length</name>
+    <key>vlen</key>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <vlen>$vlen</vlen>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>$vlen</vlen>
+  </source>
+</block>

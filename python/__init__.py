@@ -31,4 +31,7 @@ except ImportError:
 	pass
 
 # import any pure python here
+from gaussian_blur import gaussian_blur
+from histogram import histogram
+from find_peaks import find_peaks
 #

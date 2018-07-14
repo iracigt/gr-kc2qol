@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<block>
+  <name>Find Peaks</name>
+  <key>kc2qol_find_peaks</key>
+  <category>[KC2QOL]</category>
+  <import>import kc2qol</import>
+  <make>kc2qol.find_peaks($min_dist, $x_min, $x_max, $vlen)</make>
+
+  <param>
+    <name>Min Dist</name>
+    <key>min_dist</key>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>X Min</name>
+    <key>x_min</key>
+    <value>0</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>X Max</name>
+    <key>x_max</key>
+    <value>1</value>
+    <type>float</type>
+  </param>
+
+  <param>
+    <name>Vector length</name>
+    <key>vlen</key>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <vlen>$vlen</vlen>
+  </sink>
+
+  <source>
+    <name>out0</name>
+    <type>float</type>
+  </source>
+
+  <source>
+    <name>out1</name>
+    <type>float</type>
+  </source>
+
+</block>

@@ -31,7 +31,9 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/kc2qol
+    gaussian_blur.py
+    histogram.py
+    find_peaks.py DESTINATION ${GR_PYTHON_DIR}/kc2qol
 )
 
 ########################################################################

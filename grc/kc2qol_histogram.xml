@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<block>
+  <name>Histogram</name>
+  <key>kc2qol_histogram</key>
+  <category>[KC2QOL]</category>
+  <import>import kc2qol</import>
+  <make>kc2qol.histogram(points=$points, nbins=$nbins, density=$density
+      #if $range()
+      , range=$range
+      #end if
+      )</make>
+
+  <param>
+    <name>Number of points</name>
+    <key>points</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Number of bins</name>
+    <key>nbins</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Range</name>
+    <key>range</key>
+    <value>None</value>
+    <type>raw</type>
+  </param>
+
+
+  <param>
+      <name>Density Function</name>
+      <key>density</key>
+      <value>False</value>
+      <type>bool</type>
+      <option>
+          <name>NO</name>
+          <key>False</key>
+      </option>
+      <option>
+          <name>YES</name>
+          <key>True</key>
+      </option>
+  </param>
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>$nbins</vlen>
+  </source>
+</block>

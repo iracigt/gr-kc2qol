@@ -18,5 +18,7 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    DESTINATION share/gnuradio/grc/blocks
+    kc2qol_gaussian_blur.xml
+    kc2qol_histogram.xml
+    kc2qol_find_peaks.xml DESTINATION share/gnuradio/grc/blocks
 )
