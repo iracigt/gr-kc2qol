@@ -51,7 +51,7 @@ class find_peaks(gr.sync_block):
 
             raw_peaks = list(signal.argrelmax(data)[0])
             raw_peaks.sort(key=lambda x: data[x], reverse=True)
-            stripped = strip_nearby(raw_peaks, (self.min_dist - self.x_min) / (self.x_max - self.x_min) * len(data))
+            stripped = strip_nearby(raw_peaks, self.min_dist / (self.x_max - self.x_min) * len(data))
 
             peaks = sorted(stripped[:2])
 
