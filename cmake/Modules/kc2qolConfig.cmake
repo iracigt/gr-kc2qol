@@ -22,9 +22,10 @@ FIND_LIBRARY(
           /usr/local/lib64
           /usr/lib
           /usr/lib64
-)
+          )
+
+include("${CMAKE_CURRENT_LIST_DIR}/kc2qolTarget.cmake")
 
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(KC2QOL DEFAULT_MSG KC2QOL_LIBRARIES KC2QOL_INCLUDE_DIRS)
 MARK_AS_ADVANCED(KC2QOL_LIBRARIES KC2QOL_INCLUDE_DIRS)
-

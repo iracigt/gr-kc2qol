@@ -22,16 +22,17 @@
 This is the GNU Radio KC2QOL module. Place your Python package
 description here (python/__init__.py).
 '''
+from __future__ import unicode_literals
 
 # import swig generated symbols into the kc2qol namespace
 try:
-	# this might fail if the module is python-only
-	from kc2qol_swig import *
+    # this might fail if the module is python-only
+    from .kc2qol_swig import *
 except ImportError:
-	pass
+    pass
 
 # import any pure python here
-from gaussian_blur import gaussian_blur
-from histogram import histogram
-from find_peaks import find_peaks
+from .find_peaks import find_peaks
+from .gaussian_blur import gaussian_blur
+from .histogram import histogram
 #
