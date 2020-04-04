@@ -17,9 +17,10 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     kc2qol_find_peaks.block.yml
     kc2qol_gaussian_blur.block.yml
-    kc2qol_histogram.block.yml DESTINATION share/gnuradio/grc/blocks
+    kc2qol_histogram.block.yml
+    kc2qol_dvbs2_pl_chunker.block.yml
+    kc2qol_dvbs2_8psk_demod.block.yml DESTINATION share/gnuradio/grc/blocks
 )

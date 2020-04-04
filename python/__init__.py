@@ -35,4 +35,8 @@ except ImportError:
 from .find_peaks import find_peaks
 from .gaussian_blur import gaussian_blur
 from .histogram import histogram
+from .dvbs2_pl_chunker import dvbs2_pl_chunker
+from .dvbs2_8psk_demod import dvbs2_8psk_demod
+
+
 #

@@ -34,7 +34,9 @@ GR_PYTHON_INSTALL(
     __init__.py
     find_peaks.py
     gaussian_blur.py
-    histogram.py DESTINATION ${GR_PYTHON_DIR}/kc2qol
+    histogram.py
+    dvbs2_pl_chunker.py
+    dvbs2_8psk_demod.py DESTINATION ${GR_PYTHON_DIR}/kc2qol
 )
 
 ########################################################################

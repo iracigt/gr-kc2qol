@@ -1,0 +1,57 @@
+id: kc2qol_dvbs2_pl_chunker
+label: DVB-S2 PL Chunker
+category: '[KC2QOL]'
+
+templates:
+  imports: import kc2qol, numpy
+  make: kc2qol.dvbs2_pl_chunker(${packet_len}, ${start_tag}, ${hdr_len}, ${type.numpy})
+
+#  Make one 'parameters' list entry for every Parameter you want settable from the GUI.
+#     Sub-entries of dictionary:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label
+#     * dtype 
+parameters:
+-   id: type
+    label: Type
+    dtype: enum
+    options: [complex, float, int, byte]
+    option_labels: [Complex, Float, Int, Byte]
+    option_attributes:
+        numpy: [numpy.complex64, numpy.float32, numpy.int32, numpy.uint8]
+    hide: part
+-   id: packet_len
+    label: Packet Payload Length
+    dtype: int
+    default: 21600
+-   id: start_tag
+    label: Start Tag
+    dtype: raw
+    default: pmt.intern('corr_est')
+-   id: hdr_len
+    label: Header Length
+    dtype: int
+    default: 90
+
+#  Make one 'inputs' list entry per input. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * domain
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs) 
+inputs:
+-   label: in
+    domain: stream
+    dtype: ${ type }
+
+#  Make one 'outputs' list entry per output. Sub-entries of dictionary:
+#      * label (an identifier for the GUI)
+#      * dtype
+#      * vlen
+#      * optional (set to 1 for optional inputs) 
+outputs:
+-   label: out
+    domain: stream
+    dtype: ${ type }
+
+file_format: 1
