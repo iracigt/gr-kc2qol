@@ -36,7 +36,8 @@ GR_PYTHON_INSTALL(
     gaussian_blur.py
     histogram.py
     dvbs2_pl_chunker.py
-    dvbs2_8psk_demod.py DESTINATION ${GR_PYTHON_DIR}/kc2qol
+    dvbs2_8psk_demod.py
+    buncher.py DESTINATION ${GR_PYTHON_DIR}/kc2qol
 )
 
 ########################################################################
