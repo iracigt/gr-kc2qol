@@ -33,7 +33,9 @@ class buncher(gr.basic_block):
             in_sig=[tpye],
             out_sig=[tpye])
 
-        self.buf = numpy.empty(length)
+        self.set_output_multiple(length)
+
+        self.buf = numpy.empty(length, dtype=tpye)
         self.length = length
         self.index = 0
 
@@ -54,10 +56,12 @@ class buncher(gr.basic_block):
             self.buf[self.index:] = sym_in[:consumed]
         
         self.index += consumed
-
+        
+        produced = 0
         if self.index >= self.length:
-            output_items[0] = self.buf[:]
+            output_items[0][:self.length] = self.buf
+            produced = self.length
             self.index = 0
 
-        consume(0, consumed)
-        return len(output_items[0])
+        self.consume(0, consumed)
+        return produced
