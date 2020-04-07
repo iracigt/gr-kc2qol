@@ -23,6 +23,13 @@
 
 #include <kc2qol/ldpc_decoder_cb.h>
 
+#include "ldpc/alloc.hh"
+#include "ldpc/encoder.hh"
+#include "ldpc/simd.hh"
+#include "ldpc/algorithms.hh"
+#include "ldpc/interleaver.hh"
+#include "ldpc/modulation.hh"
+
 #ifdef __AVX2__
 const int SIZEOF_SIMD = 32;
 #else
@@ -33,12 +40,7 @@ typedef int8_t code_type;
 const int SIMD_WIDTH = SIZEOF_SIMD / sizeof(code_type);
 typedef SIMD<code_type, SIMD_WIDTH> simd_type;
 
-#include "ldpc/alloc.hh"
-#include "ldpc/encoder.hh"
-#include "ldpc/simd.hh"
-#include "ldpc/algorithms.hh"
-#include "ldpc/interleaver.hh"
-#include "ldpc/modulation.hh"
+const int FACTOR = 2;
 
 #include "ldpc/layered_decoder.hh"
 typedef NormalUpdate<simd_type> update_type;

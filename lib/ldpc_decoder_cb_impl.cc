@@ -24,7 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include "ldpc_decoder_cb_impl.h"
-#include "dvb_s2_tables.hh"
+#include "ldpc/dvb_s2_tables.hh"
 
 namespace gr {
   namespace kc2qol {
@@ -60,8 +60,6 @@ namespace gr {
     ldpc_decoder_cb_impl::~ldpc_decoder_cb_impl()
     {
       free(aligned_buffer);
-      delete[] dint;
-      delete[] soft;
       delete ldpc;
     }
 
