@@ -23,5 +23,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/kc2qol
+    ldpc_decoder_cb.h DESTINATION include/kc2qol
 )
