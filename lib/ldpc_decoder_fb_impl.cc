@@ -51,7 +51,7 @@ namespace gr {
 
       aligned_buffer = aligned_alloc(sizeof(simd_type), sizeof(simd_type) * ldpc->code_len());
       decode.init(ldpc);
-      set_output_multiple(nbch * SIZEOF_SIMD);
+      set_output_multiple(nbch);
     }
 
     /*
@@ -66,7 +66,9 @@ namespace gr {
     void
     ldpc_decoder_fb_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
-      ninput_items_required[0] = (noutput_items / nbch) * frame_size;
+      const int CODE_LEN = ldpc->code_len();
+      const int DATA_LEN = ldpc->data_len();
+      ninput_items_required[0] = (noutput_items / DATA_LEN) * CODE_LEN;
     }
 
     int
@@ -85,7 +87,7 @@ namespace gr {
       int bits_decoded = 0;
 
       // Make sure the we have enough input and output
-      assert(noutput_items % (DATA_LEN * SIMD_WIDTH) == 0);
+      assert(noutput_items % (DATA_LEN) == 0);
       int nblocks = noutput_items / nbch;
       assert(ninput_items[0] >= nblocks * CODE_LEN);
 
@@ -100,6 +102,7 @@ namespace gr {
             // If outside [-1,1], clamp it
             float f = in[(j+n)*CODE_LEN+i] * 127;
             int8_t soft_int = static_cast<int8_t>(std::max(std::min(f, 127.0f), -127.0f));
+            //int8_t soft_int = static_cast<int8_t>(f);
             reinterpret_cast<code_type *>(simd+i)[n] = soft_int;
           }
         }
@@ -111,7 +114,8 @@ namespace gr {
         // Extract decoded bits
         for (int n = 0; n < blocks; ++n) {
           for (int i = 0; i < DATA_LEN; ++i) {
-            out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n];
+            // out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n];
+	    out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n] > 0 ? 1 : 0;
           }
         }
 
