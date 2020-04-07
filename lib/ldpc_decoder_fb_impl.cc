@@ -23,25 +23,25 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "ldpc_decoder_cb_impl.h"
+#include "ldpc_decoder_fb_impl.h"
 #include "ldpc/dvb_s2_tables.hh"
 
 namespace gr {
   namespace kc2qol {
 
-    ldpc_decoder_cb::sptr
-    ldpc_decoder_cb::make()
+    ldpc_decoder_fb::sptr
+    ldpc_decoder_fb::make()
     {
       return gnuradio::get_initial_sptr
-        (new ldpc_decoder_cb_impl());
+        (new ldpc_decoder_fb_impl());
     }
 
 
     /*
      * The private constructor
      */
-    ldpc_decoder_cb_impl::ldpc_decoder_cb_impl()
-      : gr::block("ldpc_decoder_cb",
+    ldpc_decoder_fb_impl::ldpc_decoder_fb_impl()
+      : gr::block("ldpc_decoder_fb",
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(unsigned char)))
     {
@@ -57,20 +57,20 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    ldpc_decoder_cb_impl::~ldpc_decoder_cb_impl()
+    ldpc_decoder_fb_impl::~ldpc_decoder_fb_impl()
     {
       free(aligned_buffer);
       delete ldpc;
     }
 
     void
-    ldpc_decoder_cb_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+    ldpc_decoder_fb_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
       ninput_items_required[0] = (noutput_items / nbch) * frame_size;
     }
 
     int
-    ldpc_decoder_cb_impl::general_work (int noutput_items,
+    ldpc_decoder_fb_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)

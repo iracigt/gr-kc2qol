@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_KC2QOL_LDPC_DECODER_CB_IMPL_H
-#define INCLUDED_KC2QOL_LDPC_DECODER_CB_IMPL_H
+#ifndef INCLUDED_KC2QOL_LDPC_DECODER_FB_IMPL_H
+#define INCLUDED_KC2QOL_LDPC_DECODER_FB_IMPL_H
 
-#include <kc2qol/ldpc_decoder_cb.h>
+#include <kc2qol/ldpc_decoder_fb.h>
 
 #include "ldpc/alloc.hh"
 #include "ldpc/encoder.hh"
@@ -50,7 +50,7 @@ const int TRIALS = 25;
 namespace gr {
   namespace kc2qol {
 
-    class ldpc_decoder_cb_impl : public ldpc_decoder_cb
+    class ldpc_decoder_fb_impl : public ldpc_decoder_fb
     {
      private:
       unsigned int frame_size;
@@ -61,8 +61,8 @@ namespace gr {
       void *aligned_buffer;
 
      public:
-      ldpc_decoder_cb_impl();
-      ~ldpc_decoder_cb_impl();
+      ldpc_decoder_fb_impl();
+      ~ldpc_decoder_fb_impl();
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
@@ -77,5 +77,5 @@ namespace gr {
   } // namespace kc2qol
 } // namespace gr
 
-#endif /* INCLUDED_KC2QOL_LDPC_DECODER_CB_IMPL_H */
+#endif /* INCLUDED_KC2QOL_LDPC_DECODER_FB_IMPL_H */
 

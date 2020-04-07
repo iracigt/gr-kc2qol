@@ -1,10 +1,10 @@
-id: kc2qol_ldpc_decoder_cb
-label: ldpc_decoder_cb
+id: kc2qol_ldpc_decoder_fb
+label: Soft LDPC Decoder
 category: '[KC2QOL]'
 
 templates:
   imports: import kc2qol
-  make: kc2qol.ldpc_decoder_cb()
+  make: kc2qol.ldpc_decoder_fb()
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:

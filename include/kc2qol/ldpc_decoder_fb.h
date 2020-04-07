@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_KC2QOL_LDPC_DECODER_CB_H
-#define INCLUDED_KC2QOL_LDPC_DECODER_CB_H
+#ifndef INCLUDED_KC2QOL_LDPC_DECODER_FB_H
+#define INCLUDED_KC2QOL_LDPC_DECODER_FB_H
 
 #include <kc2qol/api.h>
 #include <gnuradio/block.h>
@@ -32,17 +32,17 @@ namespace gr {
      * \ingroup kc2qol
      *
      */
-    class KC2QOL_API ldpc_decoder_cb : virtual public gr::block
+    class KC2QOL_API ldpc_decoder_fb : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<ldpc_decoder_cb> sptr;
+      typedef boost::shared_ptr<ldpc_decoder_fb> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of kc2qol::ldpc_decoder_cb.
+       * \brief Return a shared_ptr to a new instance of kc2qol::ldpc_decoder_fb.
        *
-       * To avoid accidental use of raw pointers, kc2qol::ldpc_decoder_cb's
+       * To avoid accidental use of raw pointers, kc2qol::ldpc_decoder_fb's
        * constructor is in a private implementation
-       * class. kc2qol::ldpc_decoder_cb::make is the public interface for
+       * class. kc2qol::ldpc_decoder_fb::make is the public interface for
        * creating new instances.
        */
       static sptr make();
@@ -51,5 +51,5 @@ namespace gr {
   } // namespace kc2qol
 } // namespace gr
 
-#endif /* INCLUDED_KC2QOL_LDPC_DECODER_CB_H */
+#endif /* INCLUDED_KC2QOL_LDPC_DECODER_FB_H */
 

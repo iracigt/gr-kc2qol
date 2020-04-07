@@ -24,5 +24,5 @@ install(FILES
     kc2qol_dvbs2_pl_chunker.block.yml
     kc2qol_dvbs2_8psk_demod.block.yml
     kc2qol_buncher.block.yml
-    kc2qol_ldpc_decoder_cb.block.yml DESTINATION share/gnuradio/grc/blocks
+    kc2qol_ldpc_decoder_fb.block.yml DESTINATION share/gnuradio/grc/blocks
 )
