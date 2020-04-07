@@ -25,6 +25,7 @@ include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND kc2qol_sources
     ldpc_decoder_fb_impl.cc
+    ldpc/tables_handler.cc
 )
 
 set(kc2qol_sources "${kc2qol_sources}" PARENT_SCOPE)
