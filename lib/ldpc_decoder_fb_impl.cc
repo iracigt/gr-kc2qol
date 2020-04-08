@@ -46,8 +46,12 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(unsigned char)))
     {
       // Code Rate: 9 / 10
-      nbch = 58320;
       ldpc = new LDPC<DVB_S2_TABLE_B11>();
+      const int CODE_LEN = ldpc->code_len();
+      const int DATA_LEN = ldpc->data_len();
+      nbch = DATA_LEN;
+      
+      std::cerr << "Selected LDPC(" << CODE_LEN << ", " << DATA_LEN << ") code." << std::endl;
 
       aligned_buffer = aligned_alloc(sizeof(simd_type), sizeof(simd_type) * ldpc->code_len());
       decode.init(ldpc);
@@ -88,9 +92,10 @@ namespace gr {
 
       // Make sure the we have enough input and output
       assert(noutput_items % (DATA_LEN) == 0);
-      int nblocks = noutput_items / nbch;
+      int nblocks = noutput_items / DATA_LEN;
       assert(ninput_items[0] >= nblocks * CODE_LEN);
 
+      /* ** BEGIN ** */
       for (int j = 0; j < nblocks; j += SIMD_WIDTH) {
         // How many blocks in this batch?
         int blocks = j + SIMD_WIDTH > nblocks ? nblocks - j : SIMD_WIDTH;
@@ -101,8 +106,7 @@ namespace gr {
             // Convert float [-1,1] to signed int [-127, 127]
             // If outside [-1,1], clamp it
             float f = in[(j+n)*CODE_LEN+i] * 127;
-            int8_t soft_int = static_cast<int8_t>(std::max(std::min(f, 127.0f), -127.0f));
-            //int8_t soft_int = static_cast<int8_t>(f);
+            code_type soft_int = static_cast<code_type>(std::max(std::min(f, 127.0f), -127.0f));
             reinterpret_cast<code_type *>(simd+i)[n] = soft_int;
           }
         }
@@ -113,10 +117,9 @@ namespace gr {
 
         // Extract decoded bits
         for (int n = 0; n < blocks; ++n) {
-          for (int i = 0; i < DATA_LEN; ++i) {
-            // out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n];
-	    out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n] > 0 ? 1 : 0;
-          }
+            for (int i = 0; i < DATA_LEN; ++i) {
+            out[(j+n)*DATA_LEN+i] = reinterpret_cast<code_type *>(simd+i)[n] > 0 ? 1 : 0;
+            }
         }
 
         // Update number of items
@@ -129,6 +132,7 @@ namespace gr {
           std::cerr << trials - count << " iterations were needed." << std::endl;
         }
       }
+      /* ** END ** */
 
       // Tell runtime system how many input items we consumed on
       // each input stream.

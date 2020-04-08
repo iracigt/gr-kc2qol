@@ -36,9 +36,15 @@ const int SIZEOF_SIMD = 32;
 const int SIZEOF_SIMD = 16;
 #endif
 
-typedef int8_t code_type;
+#define USE_SIMD
+
+#ifdef USE_SIMD
 const int SIMD_WIDTH = SIZEOF_SIMD / sizeof(code_type);
 typedef SIMD<code_type, SIMD_WIDTH> simd_type;
+#else
+const int SIMD_WIDTH = 1;
+typedef code_type simd_type;
+#endif
 
 const int FACTOR = 2;
 
