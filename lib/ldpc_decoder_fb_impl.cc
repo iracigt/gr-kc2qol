@@ -136,7 +136,7 @@ namespace gr {
 
       // Tell runtime system how many input items we consumed on
       // each input stream.
-      consume_each (noutput_items);
+      consume_each(nblocks * CODE_LEN);
 
       // Tell runtime system how many output items we produced.
       return noutput_items;
